@@ -3,6 +3,8 @@ import { Container } from "react-bootstrap";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { useEffect, useState } from "react";
 import PreLoader from "./components/PreLoader";
+import NavBar from "./components/NavBar";
+import AboutUs from "./components/AboutUs";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -10,7 +12,7 @@ function App() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 3000);
+    }, 30);
 
     return () => clearTimeout(timer);
   }, []);
@@ -29,7 +31,21 @@ function App() {
           <PreLoader />
         </div>
       ) : (
-        <div>Main Content</div>
+        <BrowserRouter>
+          <NavBar />
+          <Routes>
+            <Route
+              path="/about"
+              element={
+                <Container>
+                  {" "}
+                  {/* Container is used to wrap components */}
+                  <AboutUs />
+                </Container>
+              }
+            ></Route>
+          </Routes>
+        </BrowserRouter>
       )}
     </>
   );
