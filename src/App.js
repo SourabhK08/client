@@ -6,6 +6,8 @@ import PreLoader from "./components/PreLoader";
 import NavBar from "./components/NavBar";
 import AboutUs from "./components/AboutUs";
 import ContactUs from "./components/ContactUs";
+import Policy from "./components/Policy";
+import Footer from "./components/Footer";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -13,7 +15,7 @@ function App() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 30);
+    }, 3000);
 
     return () => clearTimeout(timer);
   }, []);
@@ -54,7 +56,18 @@ function App() {
                 </Container>
               }
             ></Route>
+
+            <Route
+              path="/policy"
+              element={
+                <Container>
+                  <Policy />
+                </Container>
+              }
+            ></Route>
           </Routes>
+
+          <Footer />
         </BrowserRouter>
       )}
     </>
