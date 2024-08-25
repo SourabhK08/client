@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import PreLoader from "./components/PreLoader";
 import NavBar from "./components/NavBar";
 import AboutUs from "./components/AboutUs";
+import ContactUs from "./components/ContactUs";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -41,6 +42,15 @@ function App() {
                   {" "}
                   {/* Container is used to wrap components */}
                   <AboutUs />
+                </Container>
+              }
+            ></Route>
+
+            <Route
+              path="/contact"
+              element={
+                <Container>
+                  <ContactUs />
                 </Container>
               }
             ></Route>
