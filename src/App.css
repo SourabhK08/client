@@ -1,3 +1,5 @@
+/* FOOTER CSS */
+
 .footer{
     background: chocolate;  
   }
@@ -38,5 +40,56 @@
   }
   
   
+  /* SIGN UP FORM CSS */
   
-  
+  *{
+    margin: 0;
+  }
+
+  .signup-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: burlywood;
+  }
+
+  .signup-form{
+    background:rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgb(0, 0, 0,0.2);
+    text-align: center;
+  }
+
+  .signup-form h2{
+    color: #333;
+  }
+
+  .signup-form label{
+    display: block;
+    margin: 10px 0;
+  }
+
+  .signup-form input{
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+
+  .signup-form button{
+    background-color: bisque;
+    color: #0f0e0e;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+  }
+
+  .signup-form button:hover{
+    background-color: rgb(212, 169, 116);
+  }

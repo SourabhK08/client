@@ -8,6 +8,7 @@ import AboutUs from "./components/AboutUs";
 import ContactUs from "./components/ContactUs";
 import Policy from "./components/Policy";
 import Footer from "./components/Footer";
+import SignUpForm from "./components/SignUpForm";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -15,7 +16,7 @@ function App() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 3000);
+    }, 30);
 
     return () => clearTimeout(timer);
   }, []);
@@ -62,6 +63,15 @@ function App() {
               element={
                 <Container>
                   <Policy />
+                </Container>
+              }
+            ></Route>
+
+            <Route
+              path="/Sign-up"
+              element={
+                <Container>
+                  <SignUpForm />
                 </Container>
               }
             ></Route>
