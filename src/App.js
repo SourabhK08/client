@@ -9,6 +9,7 @@ import ContactUs from "./components/ContactUs";
 import Policy from "./components/Policy";
 import Footer from "./components/Footer";
 import SignUpForm from "./components/SignUpForm";
+import Login from "./components/Login";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -72,6 +73,15 @@ function App() {
               element={
                 <Container>
                   <SignUpForm />
+                </Container>
+              }
+            ></Route>
+
+            <Route
+              path="/login"
+              element={
+                <Container>
+                  <Login />
                 </Container>
               }
             ></Route>

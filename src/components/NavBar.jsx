@@ -27,6 +27,9 @@ const NavBar = () => {
             <LinkContainer to="/Sign-up">
               <Nav.Link>Sign Up</Nav.Link>
             </LinkContainer>
+            <LinkContainer to="/login">
+              <Nav.Link>Login</Nav.Link>
+            </LinkContainer>
           </Nav>
         </Container>
       </Navbar>
