@@ -10,6 +10,8 @@ import Policy from "./components/Policy";
 import Footer from "./components/Footer";
 import SignUpForm from "./components/SignUpForm";
 import Login from "./components/Login";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css"; // Ensure this is imported
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -17,7 +19,7 @@ function App() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 30);
+    }, 30); // This is a very short delay; adjust as needed
 
     return () => clearTimeout(timer);
   }, []);
@@ -43,13 +45,10 @@ function App() {
               path="/about"
               element={
                 <Container>
-                  {" "}
-                  {/* Container is used to wrap components */}
                   <AboutUs />
                 </Container>
               }
-            ></Route>
-
+            />
             <Route
               path="/contact"
               element={
@@ -57,8 +56,7 @@ function App() {
                   <ContactUs />
                 </Container>
               }
-            ></Route>
-
+            />
             <Route
               path="/policy"
               element={
@@ -66,17 +64,15 @@ function App() {
                   <Policy />
                 </Container>
               }
-            ></Route>
-
+            />
             <Route
-              path="/Sign-up"
+              path="/sign-up"
               element={
                 <Container>
                   <SignUpForm />
                 </Container>
               }
-            ></Route>
-
+            />
             <Route
               path="/login"
               element={
@@ -84,8 +80,20 @@ function App() {
                   <Login />
                 </Container>
               }
-            ></Route>
+            />
           </Routes>
+          {/* Toast Container to display toasts */}
+          <ToastContainer
+            position="top-center"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+          />
 
           <Footer />
         </BrowserRouter>

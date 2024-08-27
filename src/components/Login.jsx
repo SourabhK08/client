@@ -1,27 +1,71 @@
-import React from "react";
+import React, { useState } from "react";
 import "../App.css";
 import { Link } from "react-router-dom";
-import { useState } from "react";
 import { auth } from "../firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  // Function to validate email format
+  const validateEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Basic validation
+    if (!email) {
+      toast.error("Email is required");
+      return;
+    } else if (!validateEmail(email)) {
+      toast.error("Please enter a valid email address");
+      return;
+    }
+
+    if (!password) {
+      toast.error("Password is required");
+      return;
+    }
+
     try {
+      // Attempt to sign in with the provided email and password
       await signInWithEmailAndPassword(auth, email, password);
-      console.log("Login Success");
+      toast.success("Login Successful!");
     } catch (err) {
-      console.log(err);
+      // Log the error details for debugging
+      console.error("Login error:", err);
+
+      // Handle different login errors
+      switch (err.code) {
+        case "auth/user-not-found":
+          toast.error("No account found with this email. Please sign up.");
+          break;
+        case "auth/wrong-password":
+          toast.error("Incorrect password. Please try again.");
+          break;
+        case "auth/too-many-requests":
+          toast.error("Too many login attempts. Please try again later.");
+          break;
+        default:
+          toast.error("Failed to login. Please try again.");
+          break;
+      }
+    } finally {
+      // Clear form fields on any form submission attempt
+      setEmail("");
+      setPassword("");
     }
   };
 
   return (
     <div className="signup-container">
-      <form action="" className="signup-form" onSubmit={handleSubmit}>
+      <form className="signup-form" onSubmit={handleSubmit}>
         <h2>Login</h2>
 
         <label htmlFor="email">
@@ -29,7 +73,8 @@ function Login() {
           <input
             type="text"
             name="email"
-            id=""
+            id="email"
+            value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
         </label>
@@ -39,7 +84,8 @@ function Login() {
           <input
             type="password"
             name="password"
-            id=""
+            id="password"
+            value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
         </label>
@@ -50,6 +96,9 @@ function Login() {
           Don't have an account? <Link to="/Sign-up">Register</Link>
         </p>
       </form>
+
+      {/* Toast Container to display toasts */}
+      <ToastContainer />
     </div>
   );
 }
