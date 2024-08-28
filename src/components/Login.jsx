@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "../App.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom"; // Import useNavigate
 import { auth } from "../firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { ToastContainer, toast } from "react-toastify";
@@ -9,6 +9,7 @@ import "react-toastify/dist/ReactToastify.css";
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate(); // Initialize useNavigate
 
   // Function to validate email format
   const validateEmail = (email) => {
@@ -37,8 +38,10 @@ function Login() {
       // Attempt to sign in with the provided email and password
       await signInWithEmailAndPassword(auth, email, password);
       toast.success("Login Successful!");
+
+      // Redirect after successful login
+      navigate("/"); // Change the path to your desired page
     } catch (err) {
-      // Log the error details for debugging
       console.error("Login error:", err);
 
       // Handle different login errors
@@ -57,7 +60,6 @@ function Login() {
           break;
       }
     } finally {
-      // Clear form fields on any form submission attempt
       setEmail("");
       setPassword("");
     }
