@@ -10,8 +10,6 @@ import Policy from "./components/Policy";
 import Footer from "./components/Footer";
 import SignUpForm from "./components/SignUpForm";
 import Login from "./components/Login";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css"; // Ensure this is imported
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -82,18 +80,6 @@ function App() {
               }
             />
           </Routes>
-          {/* Toast Container to display toasts */}
-          <ToastContainer
-            position="top-center"
-            autoClose={5000}
-            hideProgressBar={false}
-            newestOnTop={false}
-            closeOnClick
-            rtl={false}
-            pauseOnFocusLoss
-            draggable
-            pauseOnHover
-          />
 
           <Footer />
         </BrowserRouter>
