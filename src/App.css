@@ -1,47 +1,49 @@
 /* FOOTER CSS */
 
 .footer {
-  background: chocolate;  
-  padding: 0.5rem 1rem; /* Reduce padding for a more compact look */
+  background: linear-gradient(to right, #6a11cb, #2575fc); /* Matching the login page gradient */
+  padding: 1rem 2rem; /* Slightly more padding for spacing */
   text-align: center;
   color: #fff; /* Ensures text color is readable against the background */
-  font-size: 0.9rem; /* Slightly smaller font size for a more subtle appearance */
-  border-top: 2px solid #fff; /* Optional: Add a subtle top border */
+  font-size: 0.9rem; /* Consistent font size for a modern look */
+  border-top: 2px solid #fff; /* Subtle top border to differentiate the footer */
 }
 
 .footer .share {
-  margin: 0.5rem 0; /* Adjust margin to reduce space between elements */
+  margin: 1rem 0; /* Maintain a balanced space between elements */
 }
 
 .footer .share a {
-  height: 2.5rem; /* Smaller size for social media icons */
+  height: 2.5rem;
   width: 2.5rem;
   line-height: 2.5rem;
-  font-size: 1.2rem; /* Adjust font size to match icon size */
+  font-size: 1.2rem;
   color: #fff;
-  margin: 0.25rem; /* Reduced margin for tighter spacing */
+  margin: 0.5rem; /* Tighter spacing for a clean look */
   text-decoration: none;
-  border: double 3px #fff; /* Thinner border for a subtle effect */
-  border-color: #fff #000;
-  display: inline-block; /* Ensures the links are displayed inline */
+  border: 2px solid #fff; /* Thinner border for modern effect */
+  border-radius: 50%; /* Rounded icons for a softer look */
+  transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition for hover effects */
+  display: inline-block;
 }
 
 .footer .share a:hover {
-  background-color: wheat;
-  color: black;
+  background-color: #fff; /* White background on hover */
+  color: #2575fc; /* Text color changes to match gradient */
 }
 
 .footer .credit {
-  font-size: 1rem; /* Adjust font size for a more compact look */
+  font-size: 0.9rem; /* Keep the font size subtle */
   color: #fff;
-  font-weight: lighter;
-  padding: 0.5rem; /* Reduced padding for a smaller footer */
-  text-align: center;
+  font-weight: 300; /* Lighter weight for a refined look */
+  padding: 1rem 0; /* More padding to space out the footer */
 }
 
 .footer .credit span {
-  font-weight: bold;
+  font-weight: 500; /* Slightly bolder for emphasis */
+  color: #ffe53b; /* Optional: Highlight the credit text with a different color */
 }
+
 
   
   /* SIGN UP FORM CSS */

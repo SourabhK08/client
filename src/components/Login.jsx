@@ -39,8 +39,10 @@ function Login() {
       await signInWithEmailAndPassword(auth, email, password);
       toast.success("Login Successful!");
 
-      // Redirect after successful login
-      navigate("/"); // Change the path to your desired page
+      // Delay before redirecting to ensure the toast message is displayed
+      setTimeout(() => {
+        navigate("/"); // Change the path to your desired page
+      }, 2000); // Adjust the delay (2000ms = 2 seconds) as needed
     } catch (err) {
       console.error("Login error:", err);
 
