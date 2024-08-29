@@ -4,6 +4,7 @@ import { BiPhoneCall } from "react-icons/bi";
 import { FaMobileAlt } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import { HiLocationMarker } from "react-icons/hi";
+import styles from "./ContactUs.module.css";
 const ContactUs = () => {
   return (
     <>

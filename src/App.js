@@ -10,6 +10,7 @@ import Policy from "./components/Policy";
 import Footer from "./components/Footer";
 import SignUpForm from "./components/SignUpForm";
 import Login from "./components/Login";
+import VideoUploader from "./components/VideoUploader";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -17,7 +18,7 @@ function App() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 3000); // This is a very short delay; adjust as needed
+    }, 30); // This is a very short delay; adjust as needed
 
     return () => clearTimeout(timer);
   }, []);
@@ -76,6 +77,15 @@ function App() {
               element={
                 <Container>
                   <Login />
+                </Container>
+              }
+            />
+
+            <Route
+              path="/video"
+              element={
+                <Container>
+                  <VideoUploader />
                 </Container>
               }
             />

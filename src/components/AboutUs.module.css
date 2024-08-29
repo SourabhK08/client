@@ -1,0 +1,47 @@
+.aboutUsContainer {
+    margin-top: 50px;
+    background-color: #d9dada; /* White background for a clean look */
+    padding: 40px; /* Generous padding for spacing */
+    border-radius: 10px; /* Rounded corners for a softer appearance */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  }
+  
+  .heading {
+    font-size: 2.5rem; /* Large font size for the heading */
+    font-weight: bold;
+    text-align: center;
+    color: #333; /* Dark color for better readability */
+    margin-bottom: 20px; /* Space below the heading */
+  }
+  
+  .separator {
+    border: 0; /* Remove default border */
+    height: 2px; /* Thicker line for emphasis */
+    background: linear-gradient(to right, #6a11cb, #2575fc); /* Gradient effect */
+    margin: 20px auto; /* Center align with spacing */
+    width: 80%; /* Width of the separator */
+  }
+  
+  .row {
+    margin-bottom: 40px; /* More space between rows */
+  }
+  
+  .column {
+    padding: 0 15px; /* Padding inside columns for spacing */
+  }
+  
+  .subHeading {
+    font-size: 1.8rem; /* Larger font size for subheadings */
+    color: #2575fc; /* Color to match the theme */
+    
+    padding-bottom: 10px; /* Space below the text */
+    margin-bottom: 20px; /* Space between subheading and content */
+  }
+  
+  .paragraph {
+    font-size: 1.1rem; /* Slightly larger font size for readability */
+    color: #555; /* Medium gray color for text */
+    line-height: 1.7; /* Increased line height for readability */
+    margin-bottom: 20px; /* Space between paragraphs */
+  }
+  
