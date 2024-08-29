@@ -11,6 +11,7 @@ import Footer from "./components/Footer";
 import SignUpForm from "./components/SignUpForm";
 import Login from "./components/Login";
 import VideoUploader from "./components/VideoUploader";
+import QuestionGenerator from "./components/QuestionGenerator";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -86,6 +87,15 @@ function App() {
               element={
                 <Container>
                   <VideoUploader />
+                </Container>
+              }
+            />
+
+            <Route
+              path="/"
+              element={
+                <Container>
+                  <QuestionGenerator />
                 </Container>
               }
             />
