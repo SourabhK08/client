@@ -1,19 +1,31 @@
 import React, { useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import "./QuestionGenerator.css"; // Import the updated CSS file
 
 function QuestionGenerator() {
   const [youtubeUrl, setYoutubeUrl] = useState("");
-  const [questions, setQuestions] = useState("");
+  const [questions, setQuestions] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
+
+  const isValidYoutubeUrl = (url) => {
+    const youtubeRegex =
+      /^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.?be)\/.+$/;
+    return youtubeRegex.test(url);
+  };
 
   const handleGenerateQuestions = async () => {
     if (!youtubeUrl) {
-      alert("Please enter a YouTube URL.");
+      toast.error("Please enter a YouTube URL.");
+      return;
+    }
+
+    if (!isValidYoutubeUrl(youtubeUrl)) {
+      toast.error("Invalid YouTube URL. Please enter a valid YouTube link.");
       return;
     }
 
     setLoading(true);
-    setError("");
 
     try {
       const response = await fetch(
@@ -32,10 +44,12 @@ function QuestionGenerator() {
       }
 
       const data = await response.json();
-      setQuestions(data);
+      const formattedQuestions = data.split("\n").filter((q) => q.trim());
+      setQuestions(formattedQuestions);
+      toast.success("Questions generated successfully!");
     } catch (error) {
       console.error("Error:", error);
-      setError(
+      toast.error(
         "An error occurred while generating the questions. Please try again."
       );
     } finally {
@@ -45,20 +59,30 @@ function QuestionGenerator() {
 
   return (
     <div className="App">
+      <ToastContainer />
       <h1>YouTube Transcript and Question Generator</h1>
       <input
         type="text"
         value={youtubeUrl}
         onChange={(e) => setYoutubeUrl(e.target.value)}
         placeholder="Enter YouTube URL"
+        className="input-url"
       />
-      <button onClick={handleGenerateQuestions} disabled={loading}>
+      <button
+        onClick={handleGenerateQuestions}
+        disabled={loading}
+        className="generate-button"
+      >
         {loading ? "Generating..." : "Generate Questions"}
       </button>
-      {error && <p style={{ color: "red" }}>{error}</p>}
       <h2>Generated Questions:</h2>
-      <div id="questions-output">
-        <pre>{questions}</pre>
+      <div id="questions-output" className="questions-output">
+        {questions.map((question, index) => (
+          <p>{question}</p>
+          // <p key={index}>
+          //   {index + 1}. {question}
+          // </p>
+        ))}
       </div>
     </div>
   );

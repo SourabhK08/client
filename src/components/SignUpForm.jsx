@@ -65,7 +65,12 @@ function SignUpForm() {
 
   return (
     <div className="signup-container">
-      <form className="signup-form" onSubmit={handleSubmit}>
+      <form
+        action="/sign-up"
+        method="post"
+        className="signup-form"
+        onSubmit={handleSubmit}
+      >
         <h2>Sign Up</h2>
 
         <label htmlFor="email">
