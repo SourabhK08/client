@@ -5,11 +5,13 @@ import { auth } from "../firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import axios from "axios"; // Import axios
+import axios from "axios";
+import { FaEye, FaEyeSlash } from "react-icons/fa"; // Import eye icons
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false); // State to toggle password visibility
   const navigate = useNavigate();
 
   const validateEmail = (email) => {
@@ -34,7 +36,6 @@ function Login() {
     }
 
     try {
-      // Sign in with Firebase Authentication
       const userCredential = await signInWithEmailAndPassword(
         auth,
         email,
@@ -42,16 +43,15 @@ function Login() {
       );
       const user = userCredential.user;
 
-      // Send login request to your backend
       await axios.post("http://localhost:8000/login", {
         email: user.email,
-        password: password, // Include password for verification
+        password: password,
       });
 
       toast.success("Login Successful!");
 
       setTimeout(() => {
-        navigate("/"); // Redirect after successful login
+        navigate("/");
       }, 2000);
     } catch (err) {
       console.error("Login error:", err);
@@ -94,13 +94,21 @@ function Login() {
 
         <label htmlFor="password">
           Password:
-          <input
-            type="password"
-            name="password"
-            id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
+          <div className="password-input-container">
+            <input
+              type={showPassword ? "text" : "password"}
+              name="password"
+              id="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <span
+              className="password-toggle"
+              onClick={() => setShowPassword(!showPassword)}
+            >
+              {showPassword ? <FaEyeSlash /> : <FaEye />}
+            </span>
+          </div>
         </label>
 
         <button type="submit">Login</button>

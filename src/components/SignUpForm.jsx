@@ -5,11 +5,13 @@ import { auth } from "../firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import axios from "axios"; // Import axios
+import axios from "axios";
+import { FaEye, FaEyeSlash } from "react-icons/fa"; // Import eye icons
 
 function SignUpForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false); // State to toggle password visibility
 
   const validateEmail = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -33,7 +35,6 @@ function SignUpForm() {
     }
 
     try {
-      // Sign up with Firebase Authentication
       const userCredential = await createUserWithEmailAndPassword(
         auth,
         email,
@@ -41,10 +42,9 @@ function SignUpForm() {
       );
       const user = userCredential.user;
 
-      // Send user data to your backend to store in MongoDB
       await axios.post("http://localhost:8000/sign-up", {
         email: user.email,
-        password: password, // Send password to backend (or hash it before sending)
+        password: password,
       });
 
       toast.success("Account created successfully!");
@@ -89,13 +89,21 @@ function SignUpForm() {
 
         <label htmlFor="password">
           Password:
-          <input
-            type="password"
-            name="password"
-            id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
+          <div className="password-input-container">
+            <input
+              type={showPassword ? "text" : "password"}
+              name="password"
+              id="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <span
+              className="password-toggle"
+              onClick={() => setShowPassword(!showPassword)}
+            >
+              {showPassword ? <FaEyeSlash /> : <FaEye />}
+            </span>
+          </div>
         </label>
 
         <button type="submit">Sign Up</button>

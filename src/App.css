@@ -179,3 +179,30 @@ pre {
   border-radius: 5px;
   margin-top: 20px;
 }
+
+
+/* PASSWORD EYE  */
+
+.password-input-container {
+  position: relative;
+  width: 100%; /* Ensure the container takes up the full width of the input */
+}
+
+.password-input-container input {
+  width: 100%;
+  padding-right: 40px; /* Make room for the icon */
+  box-sizing: border-box; /* Include padding in the width calculation */
+}
+
+.password-toggle {
+  position: absolute;
+  right: 10px; /* Adjust the distance from the right edge */
+  top: 50%; /* Center vertically */
+  transform: translateY(-50%); /* Correct vertical alignment */
+  cursor: pointer;
+  color: #888;
+}
+
+.password-toggle:hover {
+  color: #000;
+}
