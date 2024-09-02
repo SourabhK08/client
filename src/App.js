@@ -1,6 +1,6 @@
 import "./App.css";
 import { Container } from "react-bootstrap";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import PreLoader from "./components/PreLoader";
 import NavBar from "./components/NavBar";
@@ -12,17 +12,23 @@ import SignUpForm from "./components/SignUpForm";
 import Login from "./components/Login";
 import VideoUploader from "./components/VideoUploader";
 import QuestionGenerator from "./components/QuestionGenerator";
+import PrivateRoute from "./components/PrivateRoute";
 
 function App() {
   const [loading, setLoading] = useState(true);
+  const location = useLocation(); // Get the current route
 
   useEffect(() => {
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 30); // This is a very short delay; adjust as needed
+    }, 30);
 
     return () => clearTimeout(timer);
   }, []);
+
+  // Check if the current route is login or sign-up
+  const isAuthPage =
+    location.pathname === "/login" || location.pathname === "/sign-up";
 
   return (
     <>
@@ -38,8 +44,9 @@ function App() {
           <PreLoader />
         </div>
       ) : (
-        <BrowserRouter>
-          <NavBar />
+        <>
+          {!isAuthPage && <NavBar />}{" "}
+          {/* Render NavBar only if not on login or sign-up page */}
           <Routes>
             <Route
               path="/about"
@@ -81,28 +88,30 @@ function App() {
                 </Container>
               }
             />
-
             <Route
               path="/video"
               element={
-                <Container>
-                  <VideoUploader />
-                </Container>
+                <PrivateRoute>
+                  <Container>
+                    <VideoUploader />
+                  </Container>
+                </PrivateRoute>
               }
             />
-
             <Route
               path="/"
               element={
-                <Container>
-                  <QuestionGenerator />
-                </Container>
+                <PrivateRoute>
+                  <Container>
+                    <QuestionGenerator />
+                  </Container>
+                </PrivateRoute>
               }
             />
           </Routes>
-
-          <Footer />
-        </BrowserRouter>
+          {!isAuthPage && <Footer />}{" "}
+          {/* Render Footer only if not on login or sign-up page */}
+        </>
       )}
     </>
   );
