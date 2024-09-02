@@ -24,7 +24,7 @@ const NavBar = () => {
             <LinkContainer to="/policy">
               <Nav.Link>Terms & Conditions</Nav.Link>
             </LinkContainer>
-            <LinkContainer to="/Sign-up">
+            <LinkContainer to="/sign-up">
               <Nav.Link>Sign Up</Nav.Link>
             </LinkContainer>
             <LinkContainer to="/login">

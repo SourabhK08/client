@@ -5,12 +5,12 @@ import { auth } from "../firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import axios from "axios"; // Import axios
 
 function SignUpForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  // Function to validate email format
   const validateEmail = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
@@ -19,7 +19,6 @@ function SignUpForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Basic validation
     if (!email) {
       toast.error("Email is required");
       return;
@@ -34,14 +33,24 @@ function SignUpForm() {
     }
 
     try {
-      // Attempt to sign up with the provided email and password
-      await createUserWithEmailAndPassword(auth, email, password);
+      // Sign up with Firebase Authentication
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      const user = userCredential.user;
+
+      // Send user data to your backend to store in MongoDB
+      await axios.post("http://localhost:8000/sign-up", {
+        email: user.email,
+        password: password, // Send password to backend (or hash it before sending)
+      });
+
       toast.success("Account created successfully!");
     } catch (err) {
-      // Log the error details for debugging
       console.error("Sign up error:", err);
 
-      // Handle different sign-up errors
       switch (err.code) {
         case "auth/email-already-in-use":
           toast.error("Email already in use. Please use a different email.");
@@ -57,7 +66,6 @@ function SignUpForm() {
           break;
       }
     } finally {
-      // Clear form fields on any form submission attempt
       setEmail("");
       setPassword("");
     }
@@ -65,12 +73,7 @@ function SignUpForm() {
 
   return (
     <div className="signup-container">
-      <form
-        action="/sign-up"
-        method="post"
-        className="signup-form"
-        onSubmit={handleSubmit}
-      >
+      <form className="signup-form" onSubmit={handleSubmit}>
         <h2>Sign Up</h2>
 
         <label htmlFor="email">
@@ -102,7 +105,6 @@ function SignUpForm() {
         </p>
       </form>
 
-      {/* Toast Container to display toasts */}
       <ToastContainer />
     </div>
   );

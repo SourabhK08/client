@@ -1,0 +1,63 @@
+.contactUsContainer {
+    margin-top: 50px;
+    padding: 40px;
+    background-color: #f9f9f9; /* Light background color for a clean look */
+    border-radius: 10px; /* Rounded corners for a modern touch */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  }
+  
+  .contactUsHeading {
+    font-size: 2.5rem; /* Larger font size for the heading */
+    font-weight: bold;
+    text-align: center;
+    color: #333; /* Dark color for better readability */
+    margin-bottom: 20px; /* Space below the heading */
+  }
+  
+  .separator {
+    border: 0; /* Remove default border */
+    height: 2px; /* Thicker line for emphasis */
+    background: linear-gradient(to right, #6a11cb, #2575fc); /* Gradient effect */
+    margin: 20px auto; /* Center align with spacing */
+    width: 80%; /* Width of the separator */
+  }
+  
+  .contactInfo {
+    font-size: 1.2rem; /* Slightly larger font size for better readability */
+    color: #555; /* Medium gray color for text */
+    line-height: 1.6; /* Increased line height for readability */
+    margin-bottom: 30px; /* Space below the text */
+  }
+  
+  .contactTable {
+    font-size: 1.1rem; /* Slightly larger font size for table content */
+    color: #333; /* Dark color for better readability */
+  }
+  
+  .contactTable thead th {
+    background-color: #2575fc; /* Background color for table header */
+    color: #fff; /* White text color */
+    font-size: 1.3rem; /* Larger font size for header text */
+    font-weight: bold;
+  }
+  
+  .contactTable tbody td {
+    vertical-align: middle; /* Align icons and text vertically */
+  }
+  
+  .contactTable td {
+    padding: 10px; /* Space inside table cells */
+  }
+  
+  .contactImage {
+    width: 100%; /* Full width of the column */
+    border-radius: 10px; /* Rounded corners for the image */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  }
+  
+  .contactIcons {
+    font-size: 1.5rem; /* Larger icon size */
+    color: #2575fc; /* Color to match the theme */
+    margin-right: 10px; /* Space between icon and text */
+  }
+  

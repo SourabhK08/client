@@ -1,17 +1,17 @@
 import React, { useState } from "react";
 import "../App.css";
-import { Link, useNavigate } from "react-router-dom"; // Import useNavigate
+import { Link, useNavigate } from "react-router-dom";
 import { auth } from "../firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import axios from "axios"; // Import axios
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const navigate = useNavigate(); // Initialize useNavigate
+  const navigate = useNavigate();
 
-  // Function to validate email format
   const validateEmail = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
@@ -20,7 +20,6 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Basic validation
     if (!email) {
       toast.error("Email is required");
       return;
@@ -35,18 +34,28 @@ function Login() {
     }
 
     try {
-      // Attempt to sign in with the provided email and password
-      await signInWithEmailAndPassword(auth, email, password);
+      // Sign in with Firebase Authentication
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      const user = userCredential.user;
+
+      // Send login request to your backend
+      await axios.post("http://localhost:8000/login", {
+        email: user.email,
+        password: password, // Include password for verification
+      });
+
       toast.success("Login Successful!");
 
-      // Delay before redirecting to ensure the toast message is displayed
       setTimeout(() => {
-        navigate("/"); // Change the path to your desired page
-      }, 2000); // Adjust the delay (2000ms = 2 seconds) as needed
+        navigate("/"); // Redirect after successful login
+      }, 2000);
     } catch (err) {
       console.error("Login error:", err);
 
-      // Handle different login errors
       switch (err.code) {
         case "auth/user-not-found":
           toast.error("No account found with this email. Please sign up.");
@@ -69,12 +78,7 @@ function Login() {
 
   return (
     <div className="signup-container">
-      <form
-        action="/login"
-        method="post"
-        className="signup-form"
-        onSubmit={handleSubmit}
-      >
+      <form className="signup-form" onSubmit={handleSubmit}>
         <h2>Login</h2>
 
         <label htmlFor="email">
@@ -102,11 +106,10 @@ function Login() {
         <button type="submit">Login</button>
 
         <p>
-          Don't have an account? <Link to="/Sign-up">Register</Link>
+          Don't have an account? <Link to="/sign-up">Register</Link>
         </p>
       </form>
 
-      {/* Toast Container to display toasts */}
       <ToastContainer />
     </div>
   );
