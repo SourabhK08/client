@@ -1,3 +1,4 @@
+// Login.js
 import React, { useState } from "react";
 import "../App.css";
 import { Link, useNavigate } from "react-router-dom";
@@ -6,12 +7,12 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
-import { FaEye, FaEyeSlash } from "react-icons/fa"; // Import eye icons
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [showPassword, setShowPassword] = useState(false); // State to toggle password visibility
+  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
   const validateEmail = (email) => {
@@ -55,7 +56,6 @@ function Login() {
       }, 2000);
     } catch (err) {
       console.error("Login error:", err);
-
       switch (err.code) {
         case "auth/user-not-found":
           toast.error("No account found with this email. Please sign up.");
@@ -115,6 +115,9 @@ function Login() {
 
         <p>
           Don't have an account? <Link to="/sign-up">Register</Link>
+        </p>
+        <p>
+          <Link to="/forgot-password">Forgot Password?</Link>
         </p>
       </form>
 

@@ -12,6 +12,8 @@ import SignUpForm from "./components/SignUpForm";
 import Login from "./components/Login";
 import VideoUploader from "./components/VideoUploader";
 import QuestionGenerator from "./components/QuestionGenerator";
+import ForgotPassword from "./components/ForgotPassword";
+import ResetPassword from "./components/ResetPassword"; // Import the ResetPassword component
 import PrivateRoute from "./components/PrivateRoute";
 
 function App() {
@@ -26,9 +28,12 @@ function App() {
     return () => clearTimeout(timer);
   }, []);
 
-  // Check if the current route is login or sign-up
+  // Check if the current route is login, sign-up, or forgot password
   const isAuthPage =
-    location.pathname === "/login" || location.pathname === "/sign-up";
+    location.pathname === "/login" ||
+    location.pathname === "/sign-up" ||
+    location.pathname === "/forgot-password" ||
+    location.pathname === "/reset-password"; // Include reset-password as an auth page
 
   return (
     <>
@@ -46,7 +51,7 @@ function App() {
       ) : (
         <>
           {!isAuthPage && <NavBar />}{" "}
-          {/* Render NavBar only if not on login or sign-up page */}
+          {/* Render NavBar only if not on login, sign-up, or forgot-password/reset-password page */}
           <Routes>
             <Route
               path="/about"
@@ -89,6 +94,22 @@ function App() {
               }
             />
             <Route
+              path="/forgot-password"
+              element={
+                <Container>
+                  <ForgotPassword />
+                </Container>
+              }
+            />
+            <Route
+              path="/reset-password"
+              element={
+                <Container>
+                  <ResetPassword /> {/* Render ResetPassword directly */}
+                </Container>
+              }
+            />
+            <Route
               path="/video"
               element={
                 <PrivateRoute>
@@ -110,7 +131,7 @@ function App() {
             />
           </Routes>
           {!isAuthPage && <Footer />}{" "}
-          {/* Render Footer only if not on login or sign-up page */}
+          {/* Render Footer only if not on login, sign-up, or forgot-password/reset-password page */}
         </>
       )}
     </>
