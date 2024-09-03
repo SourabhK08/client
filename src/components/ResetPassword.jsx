@@ -10,7 +10,6 @@ const ResetPassword = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  // Extract the oobCode from the query string
   const queryParams = new URLSearchParams(location.search);
   const oobCode = queryParams.get("oobCode");
 
