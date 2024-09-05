@@ -22,11 +22,19 @@ const ForgotPassword = () => {
       );
       setEmail("");
 
+      // Redirect to login after a short delay
       setTimeout(() => {
         navigate("/login");
       }, 2000);
     } catch (error) {
-      toast.error("Failed to send password reset email. Please try again.");
+      // Show specific error messages based on error code
+      if (error.code === "auth/user-not-found") {
+        toast.error("No user found with this email address.");
+      } else if (error.code === "auth/invalid-email") {
+        toast.error("Invalid email address.");
+      } else {
+        toast.error("Failed to send password reset email. Please try again.");
+      }
       console.error(error);
     }
   };
@@ -51,7 +59,18 @@ const ForgotPassword = () => {
           Back to Login
         </button>
       </form>
-      <ToastContainer />
+      {/* Toast container to display notifications */}
+      <ToastContainer
+        position="top-center"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
     </div>
   );
 };
