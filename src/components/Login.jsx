@@ -1,4 +1,3 @@
-// Login.js
 import React, { useState } from "react";
 import "../App.css";
 import { Link, useNavigate } from "react-router-dom";
@@ -8,16 +7,22 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import ReCAPTCHA from "react-google-recaptcha";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [recaptchaToken, setRecaptchaToken] = useState(null);
   const navigate = useNavigate();
 
   const validateEmail = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
+  };
+
+  const onRecaptchaChange = (token) => {
+    setRecaptchaToken(token);
   };
 
   const handleSubmit = async (e) => {
@@ -36,6 +41,11 @@ function Login() {
       return;
     }
 
+    if (!recaptchaToken) {
+      toast.error("Please complete the reCAPTCHA");
+      return;
+    }
+
     try {
       const userCredential = await signInWithEmailAndPassword(
         auth,
@@ -47,6 +57,7 @@ function Login() {
       await axios.post("http://localhost:8000/login", {
         email: user.email,
         password: password,
+        recaptchaToken: recaptchaToken, // Send the recaptcha token to your server
       });
 
       toast.success("Login Successful!");
@@ -73,6 +84,7 @@ function Login() {
     } finally {
       setEmail("");
       setPassword("");
+      setRecaptchaToken(null); // Reset reCAPTCHA after form submission
     }
   };
 
@@ -110,6 +122,11 @@ function Login() {
             </span>
           </div>
         </label>
+
+        <ReCAPTCHA
+          sitekey="6Lc3gDUqAAAAAIlCTHGM5X29P6UU1Oxk-bjDlnfA" // Replace with your site key
+          onChange={onRecaptchaChange}
+        />
 
         <button type="submit">Login</button>
 
