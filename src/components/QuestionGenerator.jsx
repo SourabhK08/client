@@ -8,6 +8,7 @@ function QuestionGenerator() {
   const [questions, setQuestions] = useState([]);
   const [loading, setLoading] = useState(false);
   const [answers, setAnswers] = useState({});
+  const [mcqQuestionObject, setMcqQuestionObject] = useState([]);
 
   const isValidYoutubeUrl = (url) => {
     const youtubeRegex =
@@ -51,13 +52,29 @@ function QuestionGenerator() {
         .split("\n")
         .filter((q) => q.trim());
 
-      // Set questions with default MCQ options
-      const questionsWithOptions = formattedQuestions.map((question) => ({
-        question,
-        options: ["Option A", "Option B", "Option C", "Option D"], // Default options for now
-      }));
+      const mcQuestions = data.mcq.split("\n").filter((q) => q.trim());
+      let mcqQuestionObject = [];
+      for (let i = 0; i < mcQuestions.length; i += 6) {
+        let question = mcQuestions[i];
+        let options = [
+          mcQuestions[i + 1],
+          mcQuestions[i + 2],
+          mcQuestions[i + 3],
+          mcQuestions[i + 4],
+        ];
+        let answer = mcQuestions[i + 5];
 
-      setQuestions(questionsWithOptions);
+        mcqQuestionObject.push({
+          question: question,
+          options: options,
+          answer: answer,
+        });
+      }
+
+      console.log("MCQs:", mcqQuestionObject);
+
+      setMcqQuestionObject(mcqQuestionObject);
+      setQuestions(formattedQuestions);
       toast.success("Questions generated successfully!");
     } catch (error) {
       console.error("Error:", error);
@@ -78,7 +95,6 @@ function QuestionGenerator() {
 
   const handleSubmitAnswers = () => {
     console.log("User answers:", answers);
-    // You can send the user's answers to the server here
     toast.success("Answers submitted!");
   };
 
@@ -101,13 +117,23 @@ function QuestionGenerator() {
         {loading ? "Generating..." : "Generate Questions"}
       </button>
 
-      <h2>Generated Questions:</h2>
+      <h2>Generated Open Ended Questions:</h2>
       <div id="questions-output" className="questions-output">
         {questions.map((questionData, index) => (
           <div key={index}>
             <p>
-              {index + 1}. {questionData.question}{" "}
-              {/* Access questionData.question */}
+              {index + 1}. {questionData}
+            </p>
+          </div>
+        ))}
+      </div>
+
+      <h2>Generated MCQs:</h2>
+      <div id="mcq-output" className="questions-output">
+        {mcqQuestionObject.map((questionData, index) => (
+          <div key={index}>
+            <p>
+              {index + 1}. {questionData.question}
             </p>
             <div>
               {questionData.options.map((option, optionIndex) => (

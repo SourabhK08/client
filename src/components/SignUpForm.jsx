@@ -7,15 +7,21 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import { FaEye, FaEyeSlash } from "react-icons/fa"; // Import eye icons
+import ReCAPTCHA from "react-google-recaptcha";
 
 function SignUpForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false); // State to toggle password visibility
+  const [recaptchaToken, setRecaptchaToken] = useState(null);
 
   const validateEmail = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
+  };
+
+  const onRecaptchaChange = (token) => {
+    setRecaptchaToken(token);
   };
 
   const handleSubmit = async (e) => {
@@ -34,6 +40,11 @@ function SignUpForm() {
       return;
     }
 
+    if (!recaptchaToken) {
+      toast.error("Please complete the reCAPTCHA");
+      return;
+    }
+
     try {
       const userCredential = await createUserWithEmailAndPassword(
         auth,
@@ -45,6 +56,7 @@ function SignUpForm() {
       await axios.post("http://localhost:8000/sign-up", {
         email: user.email,
         password: password,
+        recaptchaToken: recaptchaToken,
       });
 
       toast.success("Account created successfully!");
@@ -68,6 +80,7 @@ function SignUpForm() {
     } finally {
       setEmail("");
       setPassword("");
+      setRecaptchaToken(null);
     }
   };
 
@@ -105,6 +118,11 @@ function SignUpForm() {
             </span>
           </div>
         </label>
+
+        <ReCAPTCHA
+          sitekey="6Lc3gDUqAAAAAIlCTHGM5X29P6UU1Oxk-bjDlnfA" // Replace with your site key
+          onChange={onRecaptchaChange}
+        />
 
         <button type="submit">Sign Up</button>
 
