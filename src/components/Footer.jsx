@@ -29,7 +29,7 @@ const Footer = () => {
         </div>
 
         <div class="credit">
-          All Rights Reserved. Copyright © <span> Sourabh kakani</span>.
+          All Rights Reserved. Copyright © <span> Sourabh & Richa </span>.
         </div>
       </section>
     </footer>

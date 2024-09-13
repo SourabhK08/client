@@ -1,47 +1,75 @@
 .aboutUsContainer {
     margin-top: 50px;
-    background-color: #d9dada; /* White background for a clean look */
-    padding: 40px; /* Generous padding for spacing */
-    border-radius: 10px; /* Rounded corners for a softer appearance */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-  }
-  
-  .heading {
-    font-size: 2.5rem; /* Large font size for the heading */
+    background-color: #1a1a1a; /* Dark background for a modern look */
+    padding: 50px;
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3); /* Deeper shadow for enhanced depth */
+    animation: fadeIn 1.2s ease-in-out; /* Smooth fade-in animation */
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.heading {
+    font-size: 3rem;
     font-weight: bold;
     text-align: center;
-    color: #333; /* Dark color for better readability */
-    margin-bottom: 20px; /* Space below the heading */
-  }
-  
-  .separator {
-    border: 0; /* Remove default border */
-    height: 2px; /* Thicker line for emphasis */
-    background: linear-gradient(to right, #6a11cb, #2575fc); /* Gradient effect */
-    margin: 20px auto; /* Center align with spacing */
-    width: 80%; /* Width of the separator */
-  }
-  
-  .row {
-    margin-bottom: 40px; /* More space between rows */
-  }
-  
-  .column {
-    padding: 0 15px; /* Padding inside columns for spacing */
-  }
-  
-  .subHeading {
-    font-size: 1.8rem; /* Larger font size for subheadings */
-    color: #2575fc; /* Color to match the theme */
-    
-    padding-bottom: 10px; /* Space below the text */
-    margin-bottom: 20px; /* Space between subheading and content */
-  }
-  
-  .paragraph {
-    font-size: 1.1rem; /* Slightly larger font size for readability */
-    color: #555; /* Medium gray color for text */
-    line-height: 1.7; /* Increased line height for readability */
-    margin-bottom: 20px; /* Space between paragraphs */
-  }
-  
+    color: #fff; /* Bright color for contrast */
+    margin-bottom: 25px;
+    animation: slideInDown 1.5s ease; /* Sliding effect for the heading */
+}
+
+@keyframes slideInDown {
+    from { opacity: 0; transform: translateY(-50px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.separator {
+    border: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #ff8a00, #e52e71); /* Vibrant gradient */
+    margin: 25px auto;
+    width: 70%; /* Adjusted width for better alignment */
+}
+
+.row {
+    margin-bottom: 40px;
+    display: flex;
+    align-items: center; /* Vertical alignment for content */
+    animation: fadeInUp 1.4s ease-in-out; /* Fade-in with upward motion */
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(50px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.column {
+    padding: 20px;
+    color: #fff; /* White text for readability on dark background */
+}
+
+.subHeading {
+    font-size: 2rem;
+    color: #ff8a00; /* Highlighted color for subheadings */
+    margin-bottom: 20px;
+    transition: color 0.3s ease; /* Smooth color transition */
+}
+
+.subHeading:hover {
+    color: #e52e71; /* Color change on hover for interaction */
+}
+
+.paragraph {
+    font-size: 1.2rem;
+    color: #e0e0e0; /* Lighter text for a balanced contrast */
+    line-height: 1.8;
+    margin-bottom: 20px;
+}
+
+.paragraph:hover {
+    transform: scale(1.02);
+    transition: transform 0.3s ease; /* Slight zoom on hover for engagement */
+}

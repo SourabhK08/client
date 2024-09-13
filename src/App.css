@@ -1,141 +1,307 @@
-/* FOOTER CSS */
+/* Global background styling */
+body {
+  background-color: #1a1a1a; /* Dark background color */
+  color: #fff; /* White text for global readability */
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
 
-.footer {
-  background: linear-gradient(to right, #6a11cb, #2575fc); /* Matching the login page gradient */
-  padding: 1rem 2rem; /* Slightly more padding for spacing */
+
+/* Footer.css */
+
+footer {
+  background-color: #1e1e1e; /* Dark background for the footer */
+  color: #fff;
+  padding: 20px;
   text-align: center;
-  color: #fff; /* Ensures text color is readable against the background */
-  font-size: 0.9rem; /* Consistent font size for a modern look */
-  border-top: 2px solid #fff; /* Subtle top border to differentiate the footer */
+
+  position: relative;
+  top: 30vh;
+  width: 100%;
+  border-top: 2px solid #3498db; /* Highlighted border at the top */
+  box-shadow: 0px -3px 10px rgba(0, 0, 0, 0.3); /* Subtle shadow for depth */
 }
 
-.footer .share {
-  margin: 1rem 0; /* Maintain a balanced space between elements */
+footer .footer {
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
-.footer .share a {
-  height: 2.5rem;
-  width: 2.5rem;
-  line-height: 2.5rem;
-  font-size: 1.2rem;
+footer .share a {
+  font-size: 2rem;
+  margin: 0 15px;
   color: #fff;
-  margin: 0.5rem; /* Tighter spacing for a clean look */
-  text-decoration: none;
-  border: 2px solid #fff; /* Thinner border for modern effect */
-  border-radius: 50%; /* Rounded icons for a softer look */
-  transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition for hover effects */
-  display: inline-block;
+  transition: transform 0.3s ease, color 0.3s ease;
+  text-decoration: none
 }
 
-.footer .share a:hover {
-  background-color: #fff; /* White background on hover */
-  color: #2575fc; /* Text color changes to match gradient */
+footer .share a:hover {
+  transform: scale(1.3); /* Zoom effect on hover */
+  color: #3498db; /* Highlight color on hover */
 }
 
-.footer .credit {
-  font-size: 0.9rem; /* Keep the font size subtle */
-  color: #fff;
-  font-weight: 300; /* Lighter weight for a refined look */
-  padding: 1rem 0; /* More padding to space out the footer */
+footer .credit {
+  margin-top: 20px;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #bdc3c7;
+  letter-spacing: 1px;
 }
 
-.footer .credit span {
-  font-weight: 500; /* Slightly bolder for emphasis */
-  color: #ffe53b; /* Optional: Highlight the credit text with a different color */
+footer .credit span {
+  color: #f1c40f; /* Highlight author name */
+  text-shadow: 2px 2px 8px rgba(255, 223, 0, 0.7); /* Glow effect */
 }
+
+@keyframes glow {
+  0% {
+      text-shadow: 0 0 5px #f1c40f, 0 0 10px #f1c40f, 0 0 20px #f1c40f;
+  }
+  50% {
+      text-shadow: 0 0 10px #f1c40f, 0 0 15px #f1c40f, 0 0 30px #f1c40f;
+  }
+  100% {
+      text-shadow: 0 0 5px #f1c40f, 0 0 10px #f1c40f, 0 0 20px #f1c40f;
+  }
+}
+
+footer .credit span {
+  animation: glow 2s infinite; /* Glowing text animation for author name */
+}
+
 
 
   
   /* SIGN UP FORM CSS */
   
-  *{
-    margin: 0;
-  }
-
-  /* General container styling */
+  /* Container styling */
 .signup-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  background: linear-gradient(to right, #6a11cb, #2575fc);
-  font-family: Arial, sans-serif;
+  min-height: 100vh;
+  background: #1c1c1e; /* Dark background */
+  padding: 20px;
+  animation: fadeIn 1s ease-in-out; /* Smooth fade-in effect */
 }
 
+/* Animation for fade-in */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Form styling */
 .signup-form {
-  background-color: white;
+  background-color: #2c2c2e; /* Darker form background */
   padding: 40px;
   border-radius: 10px;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-  width: 350px;
-  max-width: 90%;
-}
-
-.signup-form h2 {
-  margin-bottom: 20px;
-  font-size: 24px;
-  color: #333;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5); /* Soft shadow for contrast */
+  width: 100%;
+  max-width: 400px;
   text-align: center;
+  animation: scaleUp 0.5s ease-in-out; /* Smooth scale-in effect */
 }
 
-/* Input field styling */
+/* Animation for form scale-up */
+@keyframes scaleUp {
+  from {
+    transform: scale(0.9);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+/* Form headings */
+.signup-form h2 {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 30px;
+  color: #ff8c00; /* Orange text for headings */
+  animation: fadeInDown 0.8s ease; /* Fade-in heading */
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Label styling */
 .signup-form label {
+  font-size: 1.1rem;
+  color: #f4f4f5; /* Light text for labels */
+  text-align: left;
   display: block;
-  font-size: 14px;
-  margin-bottom: 8px;
-  color: #555;
+  margin-bottom: 15px;
 }
 
+/* Input fields */
 .signup-form input[type="text"],
 .signup-form input[type="password"] {
   width: 100%;
-  padding: 10px;
-  margin-bottom: 20px;
+  padding: 10px 15px;
+  margin-top: 5px;
+  font-size: 1rem;
+  background-color: #3a3a3c; /* Dark input field background */
+  border: 2px solid #ff8c00; /* Orange border */
+  color: #fff; /* Light text for inputs */
   border-radius: 5px;
-  border: 1px solid #ddd;
-  font-size: 16px;
-  transition: border-color 0.3s ease;
+  transition: border-color 0.3s;
 }
 
+/* Input focus effect */
 .signup-form input[type="text"]:focus,
 .signup-form input[type="password"]:focus {
-  border-color: #6a11cb;
+  border-color: #ff8c00;
+  box-shadow: 0 0 8px rgba(255, 140, 0, 0.6); /* Orange glow on focus */
   outline: none;
+}
+
+/* Password toggle styling */
+.password-input-container {
+  position: relative;
+}
+
+.password-toggle {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #ff8c00; /* Orange icon for password toggle */
+  font-size: 1.2rem;
 }
 
 /* Button styling */
 .signup-form button {
   width: 100%;
   padding: 12px;
-  background-color: #6a11cb;
+  margin-top: 20px;
+  background-color: #ff8c00; /* Orange button background */
+  color: #fff;
+  font-size: 1.2rem;
+  font-weight: bold;
   border: none;
   border-radius: 5px;
-  font-size: 16px;
-  color: white;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s, transform 0.2s;
 }
 
+/* Button hover effect */
 .signup-form button:hover {
-  background-color: #2575fc;
+  background-color: #e07800; /* Darker orange on hover */
+  transform: translateY(-2px); /* Lift effect */
 }
 
 /* Link styling */
 .signup-form p {
-  text-align: center;
-  font-size: 14px;
-  color: #555;
+  margin-top: 15px;
+  font-size: 0.9rem;
+  color: #f4f4f5; /* Light text for links */
 }
 
-.signup-form p a {
-  color: #6a11cb;
+.signup-form a {
+  color: #ff8c00; /* Orange links */
   text-decoration: none;
-  font-weight: bold;
+  transition: color 0.3s;
 }
 
-.signup-form p a:hover {
-  color: #2575fc;
+.signup-form a:hover {
+  color: #e07800; /* Darker orange on hover */
 }
+
+/* ReCAPTCHA container */
+.signup-form .g-recaptcha {
+  margin-top: 20px;
+}
+
+/* Toast container for notification */
+.Toastify__toast-container {
+  font-size: 1rem;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .signup-form {
+    padding: 30px;
+  }
+
+  .signup-form h2 {
+    font-size: 1.8rem;
+  }
+}
+
+
+/* Button styling */
+.signup-form button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 20px;
+  background-color: #ff8c00; /* Orange button background */
+  color: #fff; /* White text */
+  font-size: 1.2rem;
+  font-weight: bold;
+  border: none; /* Remove default borders */
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* Soft shadow */
+}
+
+/* Remove the default blue button color */
+.signup-form button:focus, 
+.signup-form button:active {
+  outline: none; /* Remove blue outline on focus */
+  background-color: #e07800; /* Darker orange when pressed or active */
+}
+
+/* Button hover effect */
+.signup-form button:hover {
+  background-color: #e07800; /* Darker orange on hover */
+  transform: translateY(-2px); /* Slight lift effect */
+}
+
+/* Disable default button outline for better integration */
+.signup-form button:focus-visible {
+  outline: none;
+}
+
+
+/* ReCAPTCHA container */
+.signup-form .g-recaptcha {
+  margin-top: 20px;
+}
+
+/* Toast container for notification */
+.Toastify__toast-container {
+  font-size: 1rem;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .signup-form {
+    padding: 30px;
+  }
+
+  .signup-form h2 {
+    font-size: 1.8rem;
+  }
+}
+
 
 /* Toast styling for better visibility */
 .Toastify__toast--error {
@@ -206,3 +372,254 @@ pre {
 .password-toggle:hover {
   color: #000;
 }
+
+
+/* Navbar.css */
+
+.navbar {
+  background-color: #2c3e50;
+  padding: 1rem 2rem;
+  font-family: 'Roboto', sans-serif;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  transition: all 0.4s ease;
+}
+
+.navbar:hover {
+  background-color: #1a252f;
+}
+
+.navbar .navbar-brand,
+.navbar .nav-link {
+  color: #ecf0f1 !important;
+  font-size: 1.1rem;
+  padding: 0.5rem 1.2rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.navbar .nav-link::before {
+  content: "";
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  bottom: -5px;
+  left: 0;
+  background-color: #e74c3c;
+  visibility: hidden;
+  transition: all 0.3s ease-in-out;
+}
+
+.navbar .nav-link:hover::before {
+  visibility: visible;
+  width: 100%;
+}
+
+.navbar .nav-link:hover {
+  color: #e74c3c !important;
+  transform: translateY(-2px);
+}
+
+.navbar .nav-link.active {
+  color: #e74c3c !important;
+  font-weight: bold;
+  text-shadow: 0 0 8px #e74c3c;
+}
+
+.navbar .nav-link.active::before {
+  visibility: visible;
+  width: 100%;
+}
+
+.navbar .nav-link:focus {
+  outline: none;
+}
+
+.navbar .nav-link.logout {
+  background: linear-gradient(135deg, #e74c3c, #c0392b);
+  padding: 0.5rem 1.5rem;
+  border-radius: 8px;
+  color: #fff !important;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+}
+
+.navbar .nav-link.logout:hover {
+  background: linear-gradient(135deg, #c0392b, #e74c3c);
+  transform: translateY(-2px);
+  box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.3);
+}
+
+.navbar .text-light {
+  color: #ecf0f1;
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-shadow: 0 0 8px #ecf0f1;
+}
+
+/* Responsive Animation */
+@media (max-width: 768px) {
+  .navbar {
+      padding: 1rem;
+  }
+
+  .navbar .nav-link {
+      padding: 0.5rem 0;
+      font-size: 1rem;
+  }
+
+  .navbar .nav-link.logout {
+      padding: 0.5rem 1rem;
+  }
+}
+
+/* Navbar animation on page load */
+@keyframes navbarFadeIn {
+  from {
+      opacity: 0;
+      transform: translateY(-20px);
+  }
+  to {
+      opacity: 1;
+      transform: translateY(0);
+  }
+}
+
+.navbar {
+  animation: navbarFadeIn 1s ease-in-out;
+}
+
+
+/* POLICY CSS */
+/* Container styling */
+.container {
+  margin-top: 50px;
+  padding: 40px;
+  background-color: #2d2d2d; /* Dark background for sleek look */
+  color: #f1f1f1; /* Light text for contrast */
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4); /* Shadow for depth */
+  animation: fadeIn 1s ease-in-out; /* Smooth fade-in effect */
+}
+
+/* Animation keyframes for fade-in */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Heading styling */
+h1 {
+  font-size: 2.8rem;
+  font-weight: bold;
+  text-align: center;
+  color: #ff8c00; /* Vibrant orange for attention */
+  margin-bottom: 25px;
+  animation: fadeInDown 1.2s ease-in; /* Slide down animation */
+}
+
+/* Animation for heading */
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* HR separator styling */
+hr {
+  height: 3px;
+  background: linear-gradient(to right, #ff416c, #ff4b2b); /* Gradient */
+  border: none;
+  margin: 20px auto;
+  width: 70%;
+  animation: growLine 1.5s ease; /* Line animation */
+}
+
+@keyframes growLine {
+  from {
+    width: 0;
+  }
+  to {
+    width: 70%;
+  }
+}
+
+/* List headings */
+h5 {
+  font-size: 1.5rem;
+  color: #ff416c; /* Gradient color theme */
+  margin-top: 25px;
+  margin-bottom: 10px;
+  animation: fadeInLeft 1.3s ease; /* Sliding left animation */
+}
+
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* List styling */
+ul {
+  list-style: square;
+  color: #f0f0f0;
+  font-size: 1.2rem;
+  line-height: 1.8;
+  margin-left: 20px;
+  animation: fadeInUp 1.2s ease; /* Fade-in animation */
+}
+
+/* Nested UL styling */
+ul ul {
+  margin-top: 10px;
+  margin-left: 30px;
+  list-style-type: disc;
+}
+
+li {
+  margin-bottom: 15px;
+  transition: transform 0.3s ease, color 0.3s ease; /* Hover animation */
+}
+
+/* Hover effect on list items */
+li:hover {
+  transform: translateX(10px);
+  color: #ff416c; /* Change color on hover */
+}
+
+/* Responsive styling */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2rem;
+  }
+
+  h5 {
+    font-size: 1.3rem;
+  }
+
+  ul {
+    font-size: 1rem;
+  }
+
+  hr {
+    width: 90%; /* Full width on smaller screens */
+  }
+}
+
