@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import "../App.css";
 import { Link, useNavigate } from "react-router-dom";
 import { auth } from "../firebase";
@@ -14,6 +14,7 @@ function Login() {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [recaptchaToken, setRecaptchaToken] = useState(null);
+  const recaptchaRef = useRef(null); // Create a ref for reCAPTCHA
   const navigate = useNavigate();
 
   const validateEmail = (email) => {
@@ -84,7 +85,10 @@ function Login() {
     } finally {
       setEmail("");
       setPassword("");
-      setRecaptchaToken(null); // Reset reCAPTCHA after form submission
+      setRecaptchaToken(null);
+      if (recaptchaRef.current) {
+        recaptchaRef.current.reset(); // Reset the reCAPTCHA
+      }
     }
   };
 
@@ -126,6 +130,7 @@ function Login() {
         <ReCAPTCHA
           sitekey="6Lc3gDUqAAAAAIlCTHGM5X29P6UU1Oxk-bjDlnfA" // Replace with your site key
           onChange={onRecaptchaChange}
+          ref={recaptchaRef} // Add the ref to the reCAPTCHA component
         />
 
         <button type="submit">Login</button>

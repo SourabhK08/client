@@ -13,7 +13,7 @@ const ContactUs = () => {
       <hr className={styles.separator} />
       <Row>
         <Col md={6}>
-          <h1>Sourabh Kakani</h1>
+          <h1>Sourabh & Richa </h1>
           <p className={styles.contactInfo}>
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptate,
             perferendis incidunt amet eveniet eius voluptas quis voluptates

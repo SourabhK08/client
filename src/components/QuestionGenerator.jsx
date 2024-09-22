@@ -7,8 +7,9 @@ function QuestionGenerator() {
   const [youtubeUrl, setYoutubeUrl] = useState("");
   const [questions, setQuestions] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [answers, setAnswers] = useState({});
   const [mcqQuestionObject, setMcqQuestionObject] = useState([]);
+  const [answers, setAnswers] = useState({}); // Track user's answers
+  const [showGeneratedText, setShowGeneratedText] = useState(false); // Control generated text visibility
 
   const isValidYoutubeUrl = (url) => {
     const youtubeRegex =
@@ -45,13 +46,15 @@ function QuestionGenerator() {
         throw new Error("Failed to generate questions.");
       }
 
-      const data = await response.json(); // Expecting JSON response from server
+      const data = await response.json();
 
-      // Access the 'questions' field (adjust if the structure is different)
+      // Removing any numbering from open-ended questions
       const formattedQuestions = data.questions
         .split("\n")
-        .filter((q) => q.trim());
+        .map((q) => q.replace(/^\d+\.\s*/, "")) // Remove leading numbers
+        .filter((q) => q.trim()); // Filter out empty strings
 
+      // Parsing MCQs and answers
       const mcQuestions = data.mcq.split("\n").filter((q) => q.trim());
       let mcqQuestionObject = [];
       for (let i = 0; i < mcQuestions.length; i += 6) {
@@ -71,10 +74,13 @@ function QuestionGenerator() {
         });
       }
 
-      console.log("MCQs:", mcqQuestionObject);
+      // Log questions and answers to the console for verification
+      console.log("Generated Open-Ended Questions:", formattedQuestions);
+      console.log("Generated MCQs:", mcqQuestionObject);
 
       setMcqQuestionObject(mcqQuestionObject);
       setQuestions(formattedQuestions);
+      setShowGeneratedText(true); // Display the text after generating questions
       toast.success("Questions generated successfully!");
     } catch (error) {
       console.error("Error:", error);
@@ -117,45 +123,51 @@ function QuestionGenerator() {
         {loading ? "Generating..." : "Generate Questions"}
       </button>
 
-      <h2>Generated Open Ended Questions:</h2>
-      <div id="questions-output" className="questions-output">
-        {questions.map((questionData, index) => (
-          <div key={index}>
-            <p>
-              {index + 1}. {questionData}
-            </p>
+      {/* Display generated text after button click */}
+      {showGeneratedText && (
+        <>
+          <h2>Generated Open Ended Questions:</h2>
+          <div id="questions-output" className="questions-output">
+            {questions.map((questionData, index) => (
+              <div key={index}>
+                <p>
+                  {index + 1}. {questionData} {/* Simple numbering, no "Q" */}
+                </p>
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
 
-      <h2>Generated MCQs:</h2>
-      <div id="mcq-output" className="questions-output">
-        {mcqQuestionObject.map((questionData, index) => (
-          <div key={index}>
-            <p>
-              {index + 1}. {questionData.question}
-            </p>
-            <div>
-              {questionData.options.map((option, optionIndex) => (
-                <div key={optionIndex}>
-                  <input
-                    type="radio"
-                    name={`question-${index}`}
-                    value={option}
-                    onChange={() => handleAnswerChange(index, option)}
-                  />
-                  {option}
+          <h2>Generated MCQs:</h2>
+          <div id="mcq-output" className="questions-output">
+            {mcqQuestionObject.map((questionData, index) => (
+              <div key={index}>
+                <p>
+                  {index + 1}. {questionData.question}
+                </p>
+                <div>
+                  {questionData.options.map((option, optionIndex) => (
+                    <div key={optionIndex}>
+                      <input
+                        type="radio"
+                        name={`question-${index}`}
+                        value={option}
+                        onChange={() => handleAnswerChange(index, option)}
+                      />
+                      {option}
+                    </div>
+                  ))}
                 </div>
-              ))}
-            </div>
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
 
-      {questions.length > 0 && (
-        <button onClick={handleSubmitAnswers} className="submit-button">
-          Submit Answers
-        </button>
+          {/* Submit Button for Answers */}
+          {questions.length > 0 && (
+            <button onClick={handleSubmitAnswers} className="submit-button">
+              Submit Answers
+            </button>
+          )}
+        </>
       )}
     </div>
   );

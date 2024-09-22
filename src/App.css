@@ -38,7 +38,7 @@ footer .share a {
 
 footer .share a:hover {
   transform: scale(1.3); /* Zoom effect on hover */
-  color: #3498db; /* Highlight color on hover */
+  color: #df6b0c; /* Highlight color on hover */
 }
 
 footer .credit {

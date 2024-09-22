@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import "../App.css";
 import { Link } from "react-router-dom";
 import { auth } from "../firebase";
@@ -14,6 +14,7 @@ function SignUpForm() {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false); // State to toggle password visibility
   const [recaptchaToken, setRecaptchaToken] = useState(null);
+  const recaptchaRef = useRef(null); // Create a ref for reCAPTCHA
 
   const validateEmail = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -56,7 +57,7 @@ function SignUpForm() {
       await axios.post("http://localhost:8000/sign-up", {
         email: user.email,
         password: password,
-        recaptchaToken: recaptchaToken,
+        recaptchaToken: recaptchaToken, // Send reCAPTCHA token to your server
       });
 
       toast.success("Account created successfully!");
@@ -81,6 +82,9 @@ function SignUpForm() {
       setEmail("");
       setPassword("");
       setRecaptchaToken(null);
+      if (recaptchaRef.current) {
+        recaptchaRef.current.reset(); // Reset the reCAPTCHA after form submission
+      }
     }
   };
 
@@ -122,6 +126,7 @@ function SignUpForm() {
         <ReCAPTCHA
           sitekey="6Lc3gDUqAAAAAIlCTHGM5X29P6UU1Oxk-bjDlnfA" // Replace with your site key
           onChange={onRecaptchaChange}
+          ref={recaptchaRef} // Add the ref to the reCAPTCHA component
         />
 
         <button type="submit">Sign Up</button>
