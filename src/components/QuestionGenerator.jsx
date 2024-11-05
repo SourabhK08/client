@@ -7,8 +7,9 @@ function QuestionGenerator() {
   const [youtubeUrl, setYoutubeUrl] = useState("");
   const [questions, setQuestions] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [mcqQuestionObject, setMcqQuestionObject] = useState([]);
+
   const [answers, setAnswers] = useState({}); // Track user's answers
+  const [mcqQuestionObject, setMcqQuestionObject] = useState([]);
   const [showGeneratedText, setShowGeneratedText] = useState(false); // Control generated text visibility
 
   const isValidYoutubeUrl = (url) => {
@@ -46,7 +47,7 @@ function QuestionGenerator() {
         throw new Error("Failed to generate questions.");
       }
 
-      const data = await response.json();
+      const data = await response.json(); // expecting JSON response from server
 
       // Removing any numbering from open-ended questions
       const formattedQuestions = data.questions
@@ -57,22 +58,25 @@ function QuestionGenerator() {
       // Parsing MCQs and answers
       const mcQuestions = data.mcq.split("\n").filter((q) => q.trim());
       let mcqQuestionObject = [];
-      for (let i = 0; i < mcQuestions.length; i += 6) {
+      for (let i = 0; i < mcQuestions.length; i++) {
         let question = mcQuestions[i];
         let options = [
-          mcQuestions[i + 1],
-          mcQuestions[i + 2],
-          mcQuestions[i + 3],
-          mcQuestions[i + 4],
-        ];
-        let answer = mcQuestions[i + 5];
+            mcQuestions[i + 1],
+            mcQuestions[i + 2],
+            mcQuestions[i + 3],
+            mcQuestions[i + 4],
+          ],
+          ans = mcQuestions[i + 5];
+        i += 5;
 
         mcqQuestionObject.push({
           question: question,
           options: options,
-          answer: answer,
+          answer: ans,
         });
       }
+
+      console.log("MCQs:", mcqQuestionObject);
 
       setMcqQuestionObject(mcqQuestionObject);
       setQuestions(formattedQuestions);
