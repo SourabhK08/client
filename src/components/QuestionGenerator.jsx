@@ -74,10 +74,6 @@ function QuestionGenerator() {
         });
       }
 
-      // Log questions and answers to the console for verification
-      console.log("Generated Open-Ended Questions:", formattedQuestions);
-      console.log("Generated MCQs:", mcqQuestionObject);
-
       setMcqQuestionObject(mcqQuestionObject);
       setQuestions(formattedQuestions);
       setShowGeneratedText(true); // Display the text after generating questions
