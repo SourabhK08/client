@@ -29,11 +29,7 @@ const NavBar = () => {
     <>
       <Navbar bg="dark" variant="dark" expand="lg">
         <Container fluid>
-          <img
-            src="images//Logo.png"
-            alt="Logo"
-            style={{ width: "70px", height: "55px" }}
-          />
+          <h6 className="text-light">Logo here</h6>
 
           <Nav className="ms-auto">
             {user && !isAuthPage ? (
